@@ -1,0 +1,28 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="User Management" class="bg-blue-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+        <ActionItem tap="{{ onAddUser }}" ios.position="right" android.position="actionBar">
+            <Label text="Add User" class="text-white p-2" />
+        </ActionItem>
+    </ActionBar>
+    
+    <GridLayout rows="auto, *" class="p-4">
+        <SearchBar row="0" hint="Search users..." text="{{ searchQuery }}" 
+                  submit="{{ onSearch }}" clear="{{ onClearSearch }}" 
+                  class="mb-4" />
+        
+        <ListView row="1" items="{{ users }}" class="bg-white rounded-lg">
+            <ListView.itemTemplate>
+                <GridLayout columns="*, auto" class="p-4 border-b border-gray-200">
+                    <StackLayout col="0">
+                        <Label text="{{ name }}" class="font-semibold" />
+                        <Label text="{{ email }}" class="text-gray-600" />
+                        <Label text="{{ role }}" class="text-sm text-blue-600" />
+                    </StackLayout>
+                    <Button col="1" text="Edit" tap="{{ $parents['ListView'].onEditUser }}" 
+                            class="bg-blue-500 text-white px-4 py-2 rounded-lg" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>

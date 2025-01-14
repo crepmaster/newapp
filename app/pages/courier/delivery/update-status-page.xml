@@ -1,0 +1,27 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="Update Delivery Status" class="bg-orange-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <Label text="Current Delivery" class="text-xl font-bold mb-4" />
+            
+            <StackLayout class="bg-white p-4 rounded-lg mb-4">
+                <Label text="{{ delivery.pickupLocation }} → {{ delivery.deliveryLocation }}" class="font-semibold" />
+                <Label text="Current Status: {{ delivery.status }}" class="text-gray-600" />
+            </StackLayout>
+            
+            <Label text="Update Status" class="text-gray-700 font-medium mb-2" />
+            <ListPicker items="{{ statusOptions }}" selectedIndex="{{ selectedStatusIndex }}"
+                       class="bg-white p-4 rounded-lg mb-4" />
+            
+            <Label text="Additional Notes" class="text-gray-700 font-medium" />
+            <TextView text="{{ notes }}" hint="Enter any additional notes"
+                     class="input p-4 bg-white rounded-lg mb-4" height="100" />
+            
+            <Button text="Update Status" tap="{{ onUpdateStatus }}" 
+                    class="bg-orange-600 text-white font-bold py-4 rounded-lg" />
+        </StackLayout>
+    </ScrollView>
+</Page>

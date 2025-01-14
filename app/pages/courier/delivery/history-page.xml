@@ -1,0 +1,25 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="Delivery History" class="bg-orange-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+    </ActionBar>
+    
+    <GridLayout rows="auto, *" class="p-4">
+        <SearchBar row="0" hint="Search deliveries..." text="{{ searchQuery }}" 
+                  submit="{{ onSearch }}" clear="{{ onClearSearch }}" 
+                  class="mb-4" />
+        
+        <ListView row="1" items="{{ deliveries }}" class="bg-white rounded-lg">
+            <ListView.itemTemplate>
+                <GridLayout columns="*, auto" class="p-4 border-b border-gray-200">
+                    <StackLayout col="0">
+                        <Label text="{{ date }}" class="font-semibold" />
+                        <Label text="{{ pickupLocation }} → {{ deliveryLocation }}" class="text-gray-600" />
+                        <Label text="{{ status }}" class="text-sm text-green-500" />
+                    </StackLayout>
+                    <Button col="1" text="Details" tap="{{ $parents['ListView'].onViewDetails }}"
+                            class="bg-orange-500 text-white px-4 py-2 rounded-lg" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>

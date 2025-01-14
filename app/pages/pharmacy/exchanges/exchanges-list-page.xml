@@ -1,0 +1,32 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="Medicine Exchanges" class="bg-green-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+    </ActionBar>
+    
+    <GridLayout rows="auto, *" class="p-4">
+        <SegmentedBar row="0" selectedIndex="{{ selectedTabIndex }}" class="mb-4">
+            <SegmentedBar.items>
+                <SegmentedBarItem title="Pending" />
+                <SegmentedBarItem title="Active" />
+                <SegmentedBarItem title="Completed" />
+            </SegmentedBar.items>
+        </SegmentedBar>
+        
+        <ListView row="1" items="{{ exchanges }}" class="bg-white rounded-lg">
+            <ListView.itemTemplate>
+                <GridLayout columns="*, auto" class="p-4 border-b border-gray-200">
+                    <StackLayout col="0">
+                        <Label text="{{ medicineName }}" class="font-semibold" />
+                        <Label text="{{ quantity }} units" class="text-gray-600" />
+                        <Label text="{{ status }}" class="text-sm" 
+                               class="{{ status === 'Pending' ? 'text-orange-500' : 
+                                       status === 'Active' ? 'text-blue-500' : 'text-green-500' }}" />
+                    </StackLayout>
+                    <Button col="1" text="{{ status === 'Pending' ? 'Accept' : 'Details' }}" 
+                            tap="{{ $parents['ListView'].onExchangeAction }}"
+                            class="{{ status === 'Pending' ? 'bg-green-500' : 'bg-blue-500' }} text-white px-4 py-2 rounded-lg" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>

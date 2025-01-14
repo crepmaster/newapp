@@ -1,0 +1,61 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="Courier Dashboard" class="bg-orange-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+        <ActionItem tap="{{ onLogout }}" ios.position="right" android.position="actionBar">
+            <Label text="Logout" class="text-white p-2" />
+        </ActionItem>
+    </ActionBar>
+    
+    <GridLayout rows="auto, *" class="p-4">
+        <StackLayout row="0" class="mb-4">
+            <Label text="Welcome {{ courierName }}" class="text-2xl font-bold mb-2" />
+            <Label text="Active Deliveries" class="text-lg text-gray-600" />
+        </StackLayout>
+        
+        <ScrollView row="1">
+            <StackLayout>
+                <GridLayout columns="*, *" rows="auto" class="gap-4">
+                    <!-- Stats Cards -->
+                    <StackLayout col="0" class="bg-white p-4 rounded-lg">
+                        <Label text="Pending Pickups" class="text-gray-600" />
+                        <Label text="{{ pendingPickups }}" class="text-2xl font-bold text-orange-500" />
+                    </StackLayout>
+                    
+                    <StackLayout col="1" class="bg-white p-4 rounded-lg">
+                        <Label text="Completed Today" class="text-gray-600" />
+                        <Label text="{{ completedToday }}" class="text-2xl font-bold text-green-500" />
+                    </StackLayout>
+                </GridLayout>
+                
+                <!-- Active Deliveries -->
+                <StackLayout class="mt-4">
+                    <Label text="Current Deliveries" class="text-xl font-bold mb-2" />
+                    <ListView items="{{ activeDeliveries }}" class="bg-white rounded-lg">
+                        <ListView.itemTemplate>
+                            <GridLayout columns="*, auto" class="p-4 border-b border-gray-200">
+                                <StackLayout col="0">
+                                    <Label text="{{ pickupLocation }}" class="font-semibold" />
+                                    <Label text="{{ deliveryLocation }}" class="text-gray-600" />
+                                    <Label text="{{ status }}" class="text-sm" />
+                                </StackLayout>
+                                <Button col="1" text="Scan QR" tap="{{ $parents['ListView'].onScanQR }}" 
+                                        class="bg-orange-500 text-white px-4 py-2 rounded-lg" />
+                            </GridLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </StackLayout>
+                
+                <!-- Quick Actions -->
+                <StackLayout class="mt-4">
+                    <Label text="Quick Actions" class="text-xl font-bold mb-2" />
+                    <Button text="Start New Delivery" tap="{{ onStartDelivery }}" 
+                            class="bg-orange-500 text-white p-4 rounded-lg mb-2" />
+                    <Button text="View History" tap="{{ onViewHistory }}" 
+                            class="bg-blue-500 text-white p-4 rounded-lg mb-2" />
+                    <Button text="Update Status" tap="{{ onUpdateStatus }}" 
+                            class="bg-green-500 text-white p-4 rounded-lg" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+</Page>

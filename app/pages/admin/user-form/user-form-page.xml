@@ -1,0 +1,50 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="{{ isEditMode ? 'Edit User' : 'Create User' }}" class="bg-blue-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <StackLayout class="form">
+                <Label text="Name" class="text-gray-700 font-medium" />
+                <TextField text="{{ name }}" hint="Enter name" 
+                          class="input p-4 bg-white rounded-lg mb-4" />
+                
+                <Label text="Email" class="text-gray-700 font-medium" />
+                <TextField text="{{ email }}" hint="Enter email" keyboardType="email"
+                          class="input p-4 bg-white rounded-lg mb-4" />
+                
+                <Label text="Role" class="text-gray-700 font-medium" />
+                <ListPicker items="{{ roles }}" selectedIndex="{{ selectedRoleIndex }}"
+                           class="p-4 bg-white rounded-lg mb-4" />
+                
+                <Label text="Phone Number" class="text-gray-700 font-medium" />
+                <TextField text="{{ phoneNumber }}" hint="Enter phone number" keyboardType="phone"
+                          class="input p-4 bg-white rounded-lg mb-4" />
+                
+                <StackLayout visibility="{{ showPharmacyFields ? 'visible' : 'collapsed' }}">
+                    <Label text="Pharmacy Name" class="text-gray-700 font-medium" />
+                    <TextField text="{{ pharmacyName }}" hint="Enter pharmacy name"
+                              class="input p-4 bg-white rounded-lg mb-4" />
+                    
+                    <Label text="Pharmacy Address" class="text-gray-700 font-medium" />
+                    <TextField text="{{ pharmacyAddress }}" hint="Enter pharmacy address"
+                              class="input p-4 bg-white rounded-lg mb-4" />
+                    
+                    <Label text="License Number" class="text-gray-700 font-medium" />
+                    <TextField text="{{ licenseNumber }}" hint="Enter license number"
+                              class="input p-4 bg-white rounded-lg mb-4" />
+                </StackLayout>
+            </StackLayout>
+            
+            <Button text="{{ isEditMode ? 'Update User' : 'Create User' }}" 
+                    tap="{{ onSave }}" 
+                    class="bg-blue-600 text-white font-bold py-4 rounded-lg mt-4" />
+            
+            <Button text="Delete User" 
+                    tap="{{ onDelete }}" 
+                    class="bg-red-600 text-white font-bold py-4 rounded-lg mt-4"
+                    visibility="{{ isEditMode ? 'visible' : 'collapsed' }}" />
+        </StackLayout>
+    </ScrollView>
+</Page>

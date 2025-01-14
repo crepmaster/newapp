@@ -1,0 +1,21 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="Scan Medicine" class="bg-green-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+    </ActionBar>
+    
+    <StackLayout class="p-4">
+        <Label text="Scan QR Code" class="text-xl font-bold mb-4" />
+        <Label text="Position the QR code within the frame" class="text-gray-600 mb-4" />
+        
+        <!-- Placeholder for QR scanner -->
+        <GridLayout class="bg-black h-64 rounded-lg mb-4">
+            <Label text="Camera Preview" class="text-white text-center" />
+        </GridLayout>
+        
+        <Button text="Toggle Flash" tap="{{ onToggleFlash }}" 
+                class="bg-gray-600 text-white font-bold py-4 rounded-lg mb-4" />
+                
+        <Label text="{{ scanResult }}" class="text-center" 
+               visibility="{{ scanResult ? 'visible' : 'collapsed' }}" />
+    </StackLayout>
+</Page>

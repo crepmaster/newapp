@@ -1,0 +1,26 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="New Delivery" class="bg-orange-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <Label text="Delivery Details" class="text-xl font-bold mb-4" />
+            
+            <Label text="Pickup Location" class="text-gray-700 font-medium" />
+            <TextField text="{{ pickupLocation }}" hint="Enter pickup location" 
+                      class="input p-4 bg-white rounded-lg mb-4" />
+            
+            <Label text="Delivery Location" class="text-gray-700 font-medium" />
+            <TextField text="{{ deliveryLocation }}" hint="Enter delivery location"
+                      class="input p-4 bg-white rounded-lg mb-4" />
+            
+            <Label text="Package Details" class="text-gray-700 font-medium" />
+            <TextView text="{{ packageDetails }}" hint="Enter package details"
+                     class="input p-4 bg-white rounded-lg mb-4" height="100" />
+            
+            <Button text="Start Delivery" tap="{{ onStartDelivery }}" 
+                    class="bg-orange-600 text-white font-bold py-4 rounded-lg mt-4" />
+        </StackLayout>
+    </ScrollView>
+</Page>

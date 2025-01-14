@@ -1,0 +1,63 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="Pharmacy Dashboard" class="bg-green-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+        <ActionItem tap="{{ onLogout }}" ios.position="right" android.position="actionBar">
+            <Label text="Logout" class="text-white p-2" />
+        </ActionItem>
+    </ActionBar>
+    
+    <GridLayout rows="auto, *" class="p-4">
+        <StackLayout row="0" class="mb-4">
+            <Label text="{{ pharmacyName }}" class="text-2xl font-bold mb-2" />
+            <Label text="Medicine Inventory" class="text-lg text-gray-600" />
+        </StackLayout>
+        
+        <ScrollView row="1">
+            <StackLayout>
+                <GridLayout columns="*, *" rows="auto, auto" class="gap-4">
+                    <!-- Stats Cards -->
+                    <StackLayout col="0" row="0" class="bg-white p-4 rounded-lg">
+                        <Label text="Available Medicines" class="text-gray-600" />
+                        <Label text="{{ availableMedicines }}" class="text-2xl font-bold" />
+                    </StackLayout>
+                    
+                    <StackLayout col="1" row="0" class="bg-white p-4 rounded-lg">
+                        <Label text="Pending Exchanges" class="text-gray-600" />
+                        <Label text="{{ pendingExchanges }}" class="text-2xl font-bold" />
+                    </StackLayout>
+                    
+                    <StackLayout col="0" row="1" class="bg-white p-4 rounded-lg">
+                        <Label text="Expiring Soon" class="text-gray-600" />
+                        <Label text="{{ expiringSoon }}" class="text-2xl font-bold text-orange-500" />
+                    </StackLayout>
+                    
+                    <StackLayout col="1" row="1" class="bg-white p-4 rounded-lg">
+                        <Label text="Total Exchanges" class="text-gray-600" />
+                        <Label text="{{ totalExchanges }}" class="text-2xl font-bold" />
+                    </StackLayout>
+                </GridLayout>
+                
+                <!-- Quick Actions -->
+                <StackLayout class="mt-4">
+                    <Label text="Quick Actions" class="text-xl font-bold mb-2" />
+                    <Button text="Add Medicine" tap="{{ onAddMedicine }}" class="bg-green-500 text-white p-4 rounded-lg mb-2" />
+                    <Button text="View Exchanges" tap="{{ onViewExchanges }}" class="bg-blue-500 text-white p-4 rounded-lg mb-2" />
+                    <Button text="Scan Medicine" tap="{{ onScanMedicine }}" class="bg-purple-500 text-white p-4 rounded-lg" />
+                </StackLayout>
+                
+                <!-- Recent Activities -->
+                <StackLayout class="mt-4">
+                    <Label text="Recent Activities" class="text-xl font-bold mb-2" />
+                    <ListView items="{{ recentActivities }}" class="bg-white rounded-lg">
+                        <ListView.itemTemplate>
+                            <StackLayout class="p-2 border-b border-gray-200">
+                                <Label text="{{ title }}" class="font-semibold" />
+                                <Label text="{{ timestamp }}" class="text-sm text-gray-500" />
+                            </StackLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+</Page>
