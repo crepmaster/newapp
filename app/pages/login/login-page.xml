@@ -11,7 +11,10 @@
                  class="input p-4 bg-white rounded-lg mb-4" />
         
         <Button text="Login" tap="{{ onLogin }}" 
-                class="bg-green-600 text-white font-bold py-3 rounded-lg" />
+                class="bg-green-600 text-white font-bold py-3 rounded-lg mb-2" />
+        
+        <Button text="Sign Up" tap="{{ onSignUp }}" 
+                class="bg-blue-600 text-white font-bold py-3 rounded-lg" />
         
         <ActivityIndicator busy="{{ isLoading }}" class="mt-4" />
         

@@ -48,7 +48,7 @@ export class DeliveryHistoryViewModel extends Observable {
         this.set('deliveries', this.allDeliveries);
     }
 
-    onViewDetails(args: any) {
+    onDeliveryDetails(args: any) {
         const delivery = args.object.bindingContext;
         Frame.topmost().navigate({
             moduleName: 'pages/courier/delivery/delivery-details-page',

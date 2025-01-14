@@ -31,9 +31,17 @@ export class CourierDashboardViewModel extends Observable {
         Frame.topmost().goBack();
     }
 
-    onStartDelivery() {
+    onLogout() {
+        this.authService.logout();
         Frame.topmost().navigate({
-            moduleName: 'pages/courier/delivery/new-delivery-page'
+            moduleName: 'pages/login/login-page',
+            clearHistory: true
+        });
+    }
+
+    onNewDelivery() {
+        Frame.topmost().navigate({
+            moduleName: 'pages/courier/delivery/delivery-page'
         });
     }
 
@@ -43,25 +51,11 @@ export class CourierDashboardViewModel extends Observable {
         });
     }
 
-    onUpdateStatus() {
-        Frame.topmost().navigate({
-            moduleName: 'pages/courier/delivery/update-status-page'
-        });
-    }
-
-    onScanQR(args: any) {
+    onUpdateDelivery(args: any) {
         const delivery = args.object.bindingContext;
         Frame.topmost().navigate({
-            moduleName: 'pages/courier/delivery/scan-qr-page',
+            moduleName: 'pages/courier/delivery/update-status-page',
             context: { delivery }
-        });
-    }
-
-    onLogout() {
-        this.authService.logout();
-        Frame.topmost().navigate({
-            moduleName: 'pages/login/login-page',
-            clearHistory: true
         });
     }
 }

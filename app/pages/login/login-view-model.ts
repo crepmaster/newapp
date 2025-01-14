@@ -1,6 +1,7 @@
 import { Observable } from '@nativescript/core';
 import { AuthService } from '../../services/auth.service';
 import { NavigationService } from '../../services/navigation.service';
+import { Frame } from '@nativescript/core';
 
 export class LoginViewModel extends Observable {
   private authService: AuthService;
@@ -35,5 +36,12 @@ export class LoginViewModel extends Observable {
     } finally {
       this.set('isLoading', false);
     }
+  }
+
+  onSignUp() {
+    Frame.topmost().navigate({
+      moduleName: 'pages/signup/signup-page',
+      clearHistory: false
+    });
   }
 }

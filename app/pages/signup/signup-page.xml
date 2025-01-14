@@ -1,0 +1,54 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <ActionBar title="Sign Up" class="bg-green-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+    </ActionBar>
+    
+    <StackLayout class="p-4">
+        <SegmentedBar selectedIndex="{{ selectedTabIndex }}" class="mb-4">
+            <SegmentedBar.items>
+                <SegmentedBarItem title="Pharmacy" />
+                <SegmentedBarItem title="Courier" />
+            </SegmentedBar.items>
+        </SegmentedBar>
+
+        <!-- Pharmacy Registration Form -->
+        <StackLayout visibility="{{ isPharmacyTab ? 'visible' : 'collapsed' }}">
+            <TextField hint="Full Name" text="{{ pharmacyForm.name }}" 
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="Email" text="{{ pharmacyForm.email }}" keyboardType="email"
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="Password" text="{{ pharmacyForm.password }}" secure="true"
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="Phone Number" text="{{ pharmacyForm.phoneNumber }}" keyboardType="phone"
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="Pharmacy Name" text="{{ pharmacyForm.pharmacyName }}"
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="Pharmacy Address" text="{{ pharmacyForm.pharmacyAddress }}"
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="License Number" text="{{ pharmacyForm.licenseNumber }}"
+                      class="input p-4 bg-white rounded-lg mb-4" />
+            <Button text="Register Pharmacy" tap="{{ onRegisterPharmacy }}"
+                    class="bg-green-600 text-white font-bold py-3 rounded-lg" />
+        </StackLayout>
+
+        <!-- Courier Registration Form -->
+        <StackLayout visibility="{{ !isPharmacyTab ? 'visible' : 'collapsed' }}">
+            <TextField hint="Full Name" text="{{ courierForm.name }}"
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="Email" text="{{ courierForm.email }}" keyboardType="email"
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="Password" text="{{ courierForm.password }}" secure="true"
+                      class="input p-4 bg-white rounded-lg mb-2" />
+            <TextField hint="Phone Number" text="{{ courierForm.phoneNumber }}" keyboardType="phone"
+                      class="input p-4 bg-white rounded-lg mb-4" />
+            <Button text="Register Courier" tap="{{ onRegisterCourier }}"
+                    class="bg-green-600 text-white font-bold py-3 rounded-lg" />
+        </StackLayout>
+
+        <ActivityIndicator busy="{{ isLoading }}" class="mt-4" />
+        
+        <Label text="{{ errorMessage }}" 
+               class="text-red-500 text-center mt-2" 
+               visibility="{{ errorMessage ? 'visible' : 'collapsed' }}" />
+    </StackLayout>
+</Page>
