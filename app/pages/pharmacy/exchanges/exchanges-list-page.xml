@@ -18,12 +18,12 @@
                     <StackLayout col="0">
                         <Label text="{{ medicineName }}" class="font-semibold" />
                         <Label text="{{ quantity }} units" class="text-gray-600" />
-                        <Label text="{{ status }}" class="text-sm" 
-                               class="{{ status === 'Pending' ? 'text-orange-500' : 
+                        <Label text="{{ status }}" 
+                               class="text-sm {{ status === 'Pending' ? 'text-orange-500' : 
                                        status === 'Active' ? 'text-blue-500' : 'text-green-500' }}" />
                     </StackLayout>
                     <Button col="1" text="{{ status === 'Pending' ? 'Accept' : 'Details' }}" 
-                            tap="{{ $parents['ListView'].onExchangeAction }}"
+                            tap="{{ $parents['ListView'].onExchangeAction, $parents['ListView'] }}"
                             class="{{ status === 'Pending' ? 'bg-green-500' : 'bg-blue-500' }} text-white px-4 py-2 rounded-lg" />
                 </GridLayout>
             </ListView.itemTemplate>

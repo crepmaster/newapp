@@ -1,4 +1,4 @@
-import { Observable, EventData } from '@nativescript/core';
+import { Observable, EventData, View } from '@nativescript/core';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
 import { Frame } from '@nativescript/core';
@@ -51,8 +51,8 @@ export class UserListViewModel extends Observable {
     }
 
     onEditUser(args: EventData) {
-        const button = args.object;
-        const user = button.bindingContext;
+        const button = args.object as View;
+        const user = button.bindingContext as User;
         
         Frame.topmost().navigate({
             moduleName: 'pages/admin/user-form/user-form-page',

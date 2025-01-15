@@ -16,7 +16,8 @@
                         <Label text="{{ pickupLocation }} → {{ deliveryLocation }}" class="text-gray-600" />
                         <Label text="{{ status }}" class="text-sm text-green-500" />
                     </StackLayout>
-                    <Button col="1" text="Details" tap="{{ $parents['ListView'].onDeliveryDetails }}"
+                    <Button col="1" text="Details" 
+                            tap="{{ $parents['ListView'].onDeliveryDetails, $parents['ListView'] }}"
                             class="bg-orange-500 text-white px-4 py-2 rounded-lg" />
                 </GridLayout>
             </ListView.itemTemplate>
