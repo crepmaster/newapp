@@ -1,13 +1,12 @@
-import { Observable } from '@nativescript/core';
+import { Observable, Frame, confirm } from '@nativescript/core';
 import { User, UserRole } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
-import { Frame } from '@nativescript/core';
 
 export class UserFormViewModel extends Observable {
     private userService: UserService;
     public isEditMode: boolean = false;
     public userId: string | null = null;
-    public roles: string[] = Object.values(UserRole);
+    public roles: UserRole[] = Object.values(UserRole);
     
     // Form fields
     public name: string = '';
@@ -84,22 +83,50 @@ export class UserFormViewModel extends Observable {
 
     async onSave() {
         try {
-            const userData = {
-                name: this.name,
-                email: this.email,
-                role: this.roles[this.selectedRoleIndex],
-                phoneNumber: this.phoneNumber,
-                pharmacyName: this.showPharmacyFields ? this.pharmacyName : undefined,
-                pharmacyAddress: this.showPharmacyFields ? this.pharmacyAddress : undefined,
-                licenseNumber: this.showPharmacyFields ? this.licenseNumber : undefined,
-                isActive: true
-            };
+            if (!this.name || !this.email || !this.phoneNumber) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const selectedRole = this.roles[this.selectedRoleIndex];
+            if (selectedRole === UserRole.PHARMACIST && 
+                (!this.pharmacyName || !this.pharmacyAddress || !this.licenseNumber)) {
+                alert('Please fill in all pharmacy details');
+                return;
+            }
 
             if (this.isEditMode && this.userId) {
-                await this.userService.updateUser(this.userId, userData);
+                // For updates, we can use Partial<User>
+                const updateData: Partial<User> = {
+                    name: this.name,
+                    email: this.email,
+                    role: selectedRole,
+                    phoneNumber: this.phoneNumber,
+                    isActive: true
+                };
+
+                if (selectedRole === UserRole.PHARMACIST) {
+                    updateData.pharmacyName = this.pharmacyName;
+                    updateData.pharmacyAddress = this.pharmacyAddress;
+                    updateData.licenseNumber = this.licenseNumber;
+                }
+
+                await this.userService.updateUser(this.userId, updateData);
                 alert('User updated successfully');
             } else {
-                await this.userService.createUser(userData);
+                // For creation, we need all required fields
+                const createData = {
+                    name: this.name,
+                    email: this.email,
+                    role: selectedRole,
+                    phoneNumber: this.phoneNumber,
+                    isActive: true,
+                    pharmacyName: selectedRole === UserRole.PHARMACIST ? this.pharmacyName : undefined,
+                    pharmacyAddress: selectedRole === UserRole.PHARMACIST ? this.pharmacyAddress : undefined,
+                    licenseNumber: selectedRole === UserRole.PHARMACIST ? this.licenseNumber : undefined
+                };
+
+                await this.userService.createUser(createData);
                 alert('User created successfully');
             }
 
