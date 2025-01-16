@@ -17,10 +17,13 @@ export class UserListViewModel extends Observable {
 
     async loadUsers() {
         try {
+            console.log('Loading users...');
             this.allUsers = await this.userService.getUsers();
+            console.log('Users loaded:', this.allUsers);
             this.set('users', this.allUsers);
         } catch (error) {
             console.error('Error loading users:', error);
+            alert('Failed to load users. Please try again.');
         }
     }
 
@@ -44,6 +47,7 @@ export class UserListViewModel extends Observable {
     }
 
     onAddUser() {
+        console.log('Adding new user...');
         Frame.topmost().navigate({
             moduleName: 'pages/admin/user-form/user-form-page',
             context: { mode: 'create' }
@@ -51,13 +55,30 @@ export class UserListViewModel extends Observable {
     }
 
     onEditUser(args: EventData) {
-        const button = args.object as View;
-        const user = button.bindingContext as User;
-        
-        Frame.topmost().navigate({
-            moduleName: 'pages/admin/user-form/user-form-page',
-            context: { mode: 'edit', userId: user.id }
-        });
+        try {
+            console.log('Edit button clicked');
+            const button = args.object as View;
+            const user = button.bindingContext;
+            
+            console.log('User data:', user);
+            
+            if (!user) {
+                console.error('No user data found');
+                return;
+            }
+
+            console.log('Navigating to edit form for user:', user.id);
+            Frame.topmost().navigate({
+                moduleName: 'pages/admin/user-form/user-form-page',
+                context: { 
+                    mode: 'edit', 
+                    userId: user.id 
+                }
+            });
+        } catch (error) {
+            console.error('Error in onEditUser:', error);
+            alert('Failed to open edit form');
+        }
     }
 
     goBack() {

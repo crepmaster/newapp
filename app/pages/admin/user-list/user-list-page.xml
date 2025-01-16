@@ -20,7 +20,7 @@
                         <Label text="{{ role }}" class="text-sm text-blue-600" />
                     </StackLayout>
                     <Button col="1" text="Edit" 
-                            tap="{{ $parents['ListView'].onEditUser, $parents['ListView'] }}"
+                            tap="{{ $parents['ListView'].onEditUser }}"
                             class="bg-blue-500 text-white px-4 py-2 rounded-lg" />
                 </GridLayout>
             </ListView.itemTemplate>
