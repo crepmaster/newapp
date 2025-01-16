@@ -14,8 +14,8 @@
         
         <ScrollView row="1">
             <StackLayout>
+                <!-- Stats Cards -->
                 <GridLayout columns="*, *" rows="auto, auto" class="gap-4">
-                    <!-- Stats Cards -->
                     <StackLayout col="0" row="0" class="bg-white p-4 rounded-lg">
                         <Label text="Available Medicines" class="text-gray-600" />
                         <Label text="{{ availableMedicines }}" class="text-2xl font-bold" />

@@ -1,7 +1,6 @@
-import { Observable, EventData, View } from '@nativescript/core';
+import { Observable, EventData, View, Frame } from '@nativescript/core';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
-import { Frame } from '@nativescript/core';
 
 export class UserListViewModel extends Observable {
     private userService: UserService;
@@ -23,7 +22,6 @@ export class UserListViewModel extends Observable {
             this.set('users', this.allUsers);
         } catch (error) {
             console.error('Error loading users:', error);
-            alert('Failed to load users. Please try again.');
         }
     }
 
@@ -58,26 +56,22 @@ export class UserListViewModel extends Observable {
         try {
             console.log('Edit button clicked');
             const button = args.object as View;
-            const user = button.bindingContext;
+            const bindingContext = button.bindingContext;
             
-            console.log('User data:', user);
-            
-            if (!user) {
-                console.error('No user data found');
+            if (!bindingContext || !bindingContext.id) {
+                console.error('Invalid user data:', bindingContext);
                 return;
             }
 
-            console.log('Navigating to edit form for user:', user.id);
             Frame.topmost().navigate({
                 moduleName: 'pages/admin/user-form/user-form-page',
                 context: { 
                     mode: 'edit', 
-                    userId: user.id 
+                    userId: bindingContext.id 
                 }
             });
         } catch (error) {
             console.error('Error in onEditUser:', error);
-            alert('Failed to open edit form');
         }
     }
 

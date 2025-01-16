@@ -27,28 +27,44 @@ export class PharmacyDashboardViewModel extends Observable {
     }
 
     onAddMedicine() {
-        Frame.topmost().navigate({
-            moduleName: 'pages/pharmacy/medicine/add-medicine-page'
-        });
+        try {
+            Frame.topmost().navigate({
+                moduleName: 'pages/pharmacy/medicine/add-medicine-page'
+            });
+        } catch (error) {
+            console.error('Navigation error:', error);
+        }
     }
 
     onViewExchanges() {
-        Frame.topmost().navigate({
-            moduleName: 'pages/pharmacy/exchanges/exchanges-list-page'
-        });
+        try {
+            Frame.topmost().navigate({
+                moduleName: 'pages/pharmacy/exchanges/exchanges-list-page'
+            });
+        } catch (error) {
+            console.error('Navigation error:', error);
+        }
     }
 
     onScanMedicine() {
-        Frame.topmost().navigate({
-            moduleName: 'pages/pharmacy/medicine/scan-medicine-page'
-        });
+        try {
+            Frame.topmost().navigate({
+                moduleName: 'pages/pharmacy/medicine/scan-medicine-page'
+            });
+        } catch (error) {
+            console.error('Navigation error:', error);
+        }
     }
 
     onLogout() {
-        this.authService.logout();
-        Frame.topmost().navigate({
-            moduleName: 'pages/login/login-page',
-            clearHistory: true
-        });
+        try {
+            this.authService.logout();
+            Frame.topmost().navigate({
+                moduleName: 'pages/login/login-page',
+                clearHistory: true
+            });
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
     }
 }

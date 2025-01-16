@@ -1,4 +1,4 @@
-import { Observable, Frame } from '@nativescript/core';
+import { Observable, Frame, EventData, View } from '@nativescript/core';
 import { AuthService } from '../../services/auth.service';
 
 export class CourierDashboardViewModel extends Observable {
@@ -40,6 +40,7 @@ export class CourierDashboardViewModel extends Observable {
     }
 
     onNewDelivery() {
+        alert('New Delivery button tapped'); // Debug alert
         Frame.topmost().navigate({
             moduleName: 'pages/courier/delivery/delivery-page'
         });
@@ -51,11 +52,26 @@ export class CourierDashboardViewModel extends Observable {
         });
     }
 
-    onUpdateDelivery(args: any) {
-        const delivery = args.object.bindingContext;
-        Frame.topmost().navigate({
-            moduleName: 'pages/courier/delivery/update-status-page',
-            context: { delivery }
-        });
+    onUpdateDelivery(args: EventData) {
+        try {
+            alert('Update button tapped'); // Debug alert
+            const button = args.object as View;
+            const delivery = button.bindingContext;
+            
+            console.log('Delivery data:', delivery); // Debug log
+            
+            if (!delivery) {
+                alert('No delivery data found'); // Debug alert
+                return;
+            }
+
+            Frame.topmost().navigate({
+                moduleName: 'pages/courier/delivery/update-status-page',
+                context: { delivery }
+            });
+        } catch (error) {
+            alert('Error in onUpdateDelivery: ' + error); // Debug alert
+            console.error('Error in onUpdateDelivery:', error);
+        }
     }
 }

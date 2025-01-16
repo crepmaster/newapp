@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
     <ActionBar title="Scan Medicine" class="bg-green-600 text-white">
-        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ goBack }}" />
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="{{ $parents['Page'].goBack }}" />
     </ActionBar>
     
     <StackLayout class="p-4">
